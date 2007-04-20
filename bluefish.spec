@@ -1,5 +1,5 @@
-%define version 1.0.5
-%define release %mkrel 3
+%define version 1.0.7
+%define release %mkrel 1
 
 Summary:	Web development studio
 Name:		bluefish
@@ -23,7 +23,6 @@ BuildRequires:  desktop-file-utils
 
 # Needs the mime directories
 BuildRequires:	gnome-mime-data
-BuildRequires:	mandrake-mime
 
 %description
 Bluefish is a programmer's HTML editor, designed to save the experienced
