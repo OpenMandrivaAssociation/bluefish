@@ -1,5 +1,6 @@
-%define version 1.0.7
-%define release %mkrel 1
+%define version	1.0.7
+%define rel	3
+%define release	%mkrel %rel
 
 Summary:	Web development studio
 Name:		bluefish
@@ -19,7 +20,8 @@ BuildRequires:	pcre-devel
 BuildRequires:	gnome-vfs2-devel >= 2.5.0
 BuildRequires:	aspell-devel
 BuildRequires:	gettext
-BuildRequires:  desktop-file-utils
+BuildRequires:	desktop-file-utils
+BuildRequires:	autoconf2.5
 
 # Needs the mime directories
 BuildRequires:	gnome-mime-data
@@ -38,7 +40,7 @@ This is not a WYSIWYG editor but a HTML editor (you edit the HTML code).
 
 %build
 sed -i "s/ICONDIR\/bluefish-icon.png/bluefish-icon.png/g;" data/bluefish.desktop.in
-%configure --disable-update-databases --disable-splash-screen --enable-bookmarks
+%configure2_5x --disable-update-databases --disable-splash-screen --enable-bookmarks
 
 %make
 
@@ -83,9 +85,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 %update_menus
+%update_desktop_database
+%update_mime_database
 		
 %postun
 %clean_menus
+%clean_desktop_database
+%clean_mime_database
 
 %files -f %{name}.lang
 %defattr(-,root,root,0755)
@@ -98,7 +104,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mime-info/*
 %{_datadir}/pixmaps/*.png
 %{_datadir}/mime/packages/*
-%{_mandir}/man1/%name.1.bz2
+%{_mandir}/man1/%name.1.*
 %{_menudir}/%{name}
 %{_iconsdir}/*.png
 %{_miconsdir}/*.png
