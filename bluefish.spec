@@ -1,5 +1,5 @@
 %define version	1.0.7
-%define rel	3
+%define rel	4
 %define release	%mkrel %rel
 
 Summary:	Web development studio
@@ -21,7 +21,7 @@ BuildRequires:	gnome-vfs2-devel >= 2.5.0
 BuildRequires:	aspell-devel
 BuildRequires:	gettext
 BuildRequires:	desktop-file-utils
-BuildRequires:	autoconf2.5
+BuildRequires:	autoconf
 
 # Needs the mime directories
 BuildRequires:	gnome-mime-data
@@ -48,24 +48,8 @@ sed -i "s/ICONDIR\/bluefish-icon.png/bluefish-icon.png/g;" data/bluefish.desktop
 rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
 
-# Menu item
-mkdir -p $RPM_BUILD_ROOT%{_menudir}
-cat << EOF > $RPM_BUILD_ROOT%{_menudir}/%{name}
-?package(%{name}): \
- command="%{_bindir}/bluefish" \
- icon="bluefish.png" \
- needs="x11" \
- title="BlueFish" \
- longtitle="Web development studio" \
- section="Internet/Web Editors" \
- xdg="true"
-EOF
-
 desktop-file-install --vendor="" \
   --remove-category="Application" \
-  --add-category="WebDevelopment" \
-  --add-category="Network" \
-  --add-category="X-MandrivaLinux-Internet-WebEditors" \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/*
 
 # Install icons
@@ -105,8 +89,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/pixmaps/*.png
 %{_datadir}/mime/packages/*
 %{_mandir}/man1/%name.1.*
-%{_menudir}/%{name}
 %{_iconsdir}/*.png
 %{_miconsdir}/*.png
 %{_liconsdir}/*.png
-
