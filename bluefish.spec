@@ -10,6 +10,7 @@ Release:	%{release}
 URL:		http://bluefish.openoffice.nl/
 License:	GPL
 Group:		Networking/WWW
+BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 Source:		http://bluefish.openoffice.nl/download/%{name}-%{version}.tar.bz2
 
