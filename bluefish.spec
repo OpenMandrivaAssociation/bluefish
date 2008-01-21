@@ -1,5 +1,5 @@
 %define version	1.0.7
-%define rel	4
+%define rel	5
 %define release	%mkrel %rel
 
 Summary:	Web development studio
@@ -48,7 +48,7 @@ sed -i "s/ICONDIR\/bluefish-icon.png/bluefish-icon.png/g;" data/bluefish.desktop
 rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
 
-perl -pi -e 's/\..*/ if /^Icon/' $RPM_BUILD_ROOT%{_datadir}/applications/*
+perl -pi -e 's/\..*// if /^Icon/' $RPM_BUILD_ROOT%{_datadir}/applications/*
 desktop-file-install --vendor="" \
   --remove-category="Application" \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/*
