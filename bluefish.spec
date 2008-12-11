@@ -14,7 +14,7 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 Source:		http://bluefish.openoffice.nl/download/%{name}-%{version}.tar.bz2
 
-BuildRequires:	ImageMagick
+BuildRequires:	imagemagick
 BuildRequires:	gtk+2-devel >= 2.2.0
 BuildRequires:	pcre-devel
 BuildRequires:	gnome-vfs2-devel >= 2.5.0
