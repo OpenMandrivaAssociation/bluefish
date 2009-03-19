@@ -13,7 +13,7 @@ Group:		Networking/WWW
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 Source:		http://bluefish.openoffice.nl/download/%{name}-%{version}.tar.bz2
-
+Patch0:		bluefish-1.0.7-fix-str-fmt.patch
 BuildRequires:	imagemagick
 BuildRequires:	gtk+2-devel >= 2.2.0
 BuildRequires:	pcre-devel
@@ -37,6 +37,7 @@ This is not a WYSIWYG editor but a HTML editor (you edit the HTML code).
 
 %prep
 %setup -q
+%patch0 -p0
 
 %build
 sed -i "s/ICONDIR\/bluefish-icon.png/bluefish-icon.png/g;" data/bluefish.desktop.in
