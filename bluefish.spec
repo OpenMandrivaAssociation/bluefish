@@ -1,6 +1,6 @@
-%define version	1.0.7
-%define rel	6
-%define release	%mkrel %rel
+%define	version	1.0.7
+%define	rel	7
+%define	release	%mkrel %rel
 
 Summary:	Web development studio
 Name:		bluefish
@@ -8,7 +8,7 @@ Version:	%{version}
 Release:	%{release}
 
 URL:		http://bluefish.openoffice.nl/
-License:	GPL
+License:	GPLv2+
 Group:		Networking/WWW
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
