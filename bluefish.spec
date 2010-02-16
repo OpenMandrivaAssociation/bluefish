@@ -1,7 +1,6 @@
 %define	version	2.0.0
-%define betaver rc3
 %define	rel	1
-%define	release	%mkrel -c %betaver %rel
+%define	release	%mkrel %rel
 
 Summary:	Web development studio
 Name:		bluefish
@@ -12,10 +11,9 @@ License:	GPLv2+
 Group:		Networking/WWW
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
-Source:		http://www.bennewitz.com/bluefish/stable/source/%{name}-%{version}-%{betaver}.tar.bz2
+Source:		http://www.bennewitz.com/bluefish/stable/source/%{name}-%{version}.tar.bz2
 BuildRequires:	gtk+2-devel >= 2.2.0
 BuildRequires:	pcre-devel
-BuildRequires:	gnome-vfs2-devel >= 2.5.0
 BuildRequires:	enchant-devel
 BuildRequires:	aspell-devel
 BuildRequires:	intltool
@@ -31,7 +29,7 @@ and thumbnail dialogs,  open from the web, HTML validation and lots of wizards.
 This is not a WYSIWYG editor but a HTML editor (you edit the HTML code).
 
 %prep
-%setup -qn %{name}-%{version}-%{betaver}
+%setup -qn %{name}-%{version}
 
 %build
 %configure2_5x --disable-update-databases --disable-splash-screen
