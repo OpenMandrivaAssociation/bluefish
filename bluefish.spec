@@ -1,5 +1,5 @@
-%define	version	2.0.0
-%define	rel	2
+%define	version	2.0.1
+%define	rel	1
 %define	release	%mkrel %rel
 
 Summary:	Web development studio
