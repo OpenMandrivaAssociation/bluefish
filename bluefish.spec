@@ -1,6 +1,10 @@
 %define	version	2.2.1
 %define	rel	1
+%if %{mdkver} >= 201100
+%define release %{rel}
+%else
 %define	release	%mkrel %rel
+%endif
 
 Summary:	Web development studio
 Name:		bluefish
@@ -18,6 +22,7 @@ BuildRequires:	enchant-devel
 BuildRequires:	aspell-devel
 BuildRequires:	intltool
 BuildRequires:	gucharmap-devel
+%py_requires -d
 Requires:	python
 Requires:	dos2unix tidy lynx
 
@@ -42,11 +47,14 @@ rm -rf %{buildroot}
 %makeinstall_std
 
 rm -rf %{buildroot}%{_libdir}/%{name}/*.la
-chmod +x %{buildroot}%{_datadir}/bluefish/plugins/zencoding/filters/*.py \
+for script in %{buildroot}%{_datadir}/bluefish/plugins/zencoding/filters/*.py \
 	%{buildroot}%{_datadir}/bluefish/plugins/zencoding/actions/*.py \
 	%{buildroot}%{_datadir}/bluefish/plugins/zencoding/resources.py \
 	%{buildroot}%{_datadir}/bluefish/plugins/zencoding/utils.py \
 	%{buildroot}%{_datadir}/bluefish/plugins/zencoding/html_matcher.py
+do
+[ -f "$script" ] && chmod +x "$script"
+done
 
 %find_lang %{name} --all-name
 
