@@ -1,5 +1,5 @@
-%define	version	2.0.3
-%define	rel	2
+%define	version	2.2.1
+%define	rel	1
 %define	release	%mkrel %rel
 
 Summary:	Web development studio
@@ -18,6 +18,8 @@ BuildRequires:	enchant-devel
 BuildRequires:	aspell-devel
 BuildRequires:	intltool
 BuildRequires:	gucharmap-devel
+Requires:	python
+Requires:	dos2unix tidy lynx
 
 %description
 Bluefish is a programmer's HTML editor, designed to save the experienced
@@ -40,25 +42,13 @@ rm -rf %{buildroot}
 %makeinstall_std
 
 rm -rf %{buildroot}%{_libdir}/%{name}/*.la
+chmod +x %{buildroot}%{_datadir}/bluefish/plugins/zencoding/filters/*.py \
+	%{buildroot}%{_datadir}/bluefish/plugins/zencoding/actions/*.py \
+	%{buildroot}%{_datadir}/bluefish/plugins/zencoding/resources.py \
+	%{buildroot}%{_datadir}/bluefish/plugins/zencoding/utils.py \
+	%{buildroot}%{_datadir}/bluefish/plugins/zencoding/html_matcher.py
 
 %find_lang %{name} --all-name
-
-%clean
-rm -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post
-%update_menus
-%update_desktop_database
-%update_mime_database
-%endif
-		
-%if %mdkversion < 200900
-%postun
-%clean_menus
-%clean_desktop_database
-%clean_mime_database
-%endif
 
 %files -f %{name}.lang
 %defattr(-,root,root,-)
