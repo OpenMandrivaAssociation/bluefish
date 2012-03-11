@@ -1,4 +1,4 @@
-%define	version	2.2.1
+%define	version	2.2.2
 %define	rel	1
 %if %{mdkver} >= 201100
 %define release %{rel}
@@ -13,18 +13,21 @@ Release:	%{release}
 URL:		http://bluefish.openoffice.nl/
 License:	GPLv2+
 Group:		Networking/WWW
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
-
-Source:		http://www.bennewitz.com/bluefish/stable/source/%{name}-%{version}.tar.bz2
+Source0:	http://www.bennewitz.com/bluefish/stable/source/%{name}-%{version}.tar.bz2
+%if %{mdvver} <= 201100
 BuildRequires:	gtk+2-devel >= 2.2.0
+%else
+BuildRequires:	gtk+3-devel
+%endif
 BuildRequires:	pcre-devel
 BuildRequires:	enchant-devel
 BuildRequires:	aspell-devel
 BuildRequires:	intltool
+BuildRequires:	pkgconfig(gconf-2.0)
 BuildRequires:	gucharmap-devel
 %py_requires -d
 Requires:	python
-Requires:	dos2unix tidy lynx
+Suggests:	dos2unix tidy lynx
 
 %description
 Bluefish is a programmer's HTML editor, designed to save the experienced
@@ -36,7 +39,7 @@ and thumbnail dialogs,  open from the web, HTML validation and lots of wizards.
 This is not a WYSIWYG editor but a HTML editor (you edit the HTML code).
 
 %prep
-%setup -qn %{name}-%{version}
+%setup -q
 
 %build
 %configure2_5x --disable-update-databases --disable-splash-screen
