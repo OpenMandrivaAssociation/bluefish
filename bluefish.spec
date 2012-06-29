@@ -1,4 +1,4 @@
-%define	version	2.2.2
+%define	version	2.2.3
 %define	rel	1
 %if %{mdkver} >= 201100
 %define release %{rel}
@@ -46,10 +46,9 @@ This is not a WYSIWYG editor but a HTML editor (you edit the HTML code).
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 
-rm -rf %{buildroot}%{_libdir}/%{name}/*.la
+rm -f %{buildroot}%{_libdir}/%{name}/*.la
 for script in %{buildroot}%{_datadir}/bluefish/plugins/zencoding/filters/*.py \
 	%{buildroot}%{_datadir}/bluefish/plugins/zencoding/actions/*.py \
 	%{buildroot}%{_datadir}/bluefish/plugins/zencoding/resources.py \
@@ -62,7 +61,6 @@ done
 %find_lang %{name} --all-name
 
 %files -f %{name}.lang
-%defattr(-,root,root,-)
 %doc AUTHORS README ChangeLog NEWS TODO
 %{_bindir}/%{name}
 %{_libdir}/%{name}
