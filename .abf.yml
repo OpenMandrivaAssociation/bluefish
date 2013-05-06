@@ -1,2 +1,4 @@
+removed_sources:
+  bluefish-2.2.3.tar.bz2: 181f28b595f6259441eb13f4aaae60def596b980
 sources:
-  "bluefish-2.2.3.tar.bz2": 181f28b595f6259441eb13f4aaae60def596b980
+  bluefish-2.2.4.tar.bz2: b65310617b5fd525a8c57f7681e023f6f4496378
