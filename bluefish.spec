@@ -15,8 +15,9 @@ BuildRequires:	aspell-devel
 BuildRequires:	intltool
 BuildRequires:	pkgconfig(gconf-2.0)
 BuildRequires:	gucharmap-devel
-%py_requires -d
-Requires:	python
+BuildRequires:	pkgconfig(python)
+Requires:	python(abi) = 2.7
+#%py_requires -d
 Suggests:	dos2unix tidy lynx
 
 %description
@@ -146,10 +147,10 @@ done
 - New version 1.0.7
 
 
-* Thu Sep 28 2006 Nicolas L�cureuil <neoclust@mandriva.org> 1.0.5-3mdv2007.0
+* Thu Sep 28 2006 Nicolas Lécureuil <neoclust@mandriva.org> 1.0.5-3mdv2007.0
 - Fix BuildRequires
 
-* Thu Sep 28 2006 Nicolas L�cureuil <neoclust@mandriva.org> 1.0.5-2mdv2007.0
+* Thu Sep 28 2006 Nicolas Lécureuil <neoclust@mandriva.org> 1.0.5-2mdv2007.0
 - Use mkrel
 - XDG
 
@@ -177,7 +178,7 @@ done
 - Patch1: Fix DESTDIR support
 - Add many unreasonable buildrequires
 
-* Fri Apr 30 2004 Götz Waschk <waschk@linux-mandrake.com> 0.12-4mdk
+* Fri Apr 30 2004 GÃ¶tz Waschk <waschk@linux-mandrake.com> 0.12-4mdk
 - build for new gettext
 
 * Mon Feb 09 2004 Olivier Blin <blino@mandrake.org> 0.12-3mdk
