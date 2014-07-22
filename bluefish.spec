@@ -15,8 +15,8 @@ BuildRequires:	aspell-devel
 BuildRequires:	intltool
 BuildRequires:	pkgconfig(gconf-2.0)
 BuildRequires:	gucharmap-devel
-BuildRequires:	pkgconfig(python)
 Requires:	python(abi) = 2.7
+BuildRequires:	pkgconfig(python)
 #%py_requires -d
 Suggests:	dos2unix tidy lynx
 
