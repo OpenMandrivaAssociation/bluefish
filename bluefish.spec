@@ -3,7 +3,7 @@
 Summary:	Web development studio
 Name:		bluefish
 Version:	2.2.4
-Release:	7
+Release:	8
 URL:		http://bluefish.openoffice.nl/
 License:	GPLv2+
 Group:		Networking/WWW
