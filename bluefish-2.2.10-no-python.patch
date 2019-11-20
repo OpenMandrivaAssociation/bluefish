@@ -1,0 +1,150 @@
+--- data/Makefile.am
++++ data/Makefile.am
+@@ -10,6 +10,13 @@ nobase_bfdata_DATA = \
+ 	default_accelmap \
+ 	encodings \
+ 	snippets \
++	colorprofiles/Light_theme \
++	colorprofiles/Dark_theme
++
++bfdata_SCRIPTS =
++
++if ENABLE_ZENCODING_PLUGIN
++nobase_bfdata_DATA += \
+ 	lipsum/__init__.py \
+ 	lipsum/data/dictionary.txt \
+ 	lipsum/data/sample.txt \
+@@ -21,13 +28,12 @@ nobase_bfdata_DATA = \
+ 	jsbeautifier/unpackers/myobfuscate.py \
+ 	jsbeautifier/unpackers/__init__.py \
+ 	jsbeautifier/unpackers/evalbased.py \
+-	jsbeautifier/unpackers/urlencode.py \
+-	colorprofiles/Light_theme \
+-	colorprofiles/Dark_theme
++	jsbeautifier/unpackers/urlencode.py
+ 
+-bfdata_SCRIPTS = \
++bfdata_SCRIPTS += \
+ 	lorem-ipsum-generator \
+ 	jsbeautify \
+ 	jsmin.py \
+ 	css_decompressor \
+ 	cssmin.py
++endif
+--- src/bfwin_uimanager.c
++++ src/bfwin_uimanager.c
+@@ -892,8 +892,10 @@ static const GtkActionEntry global_actio
+ 	{"DeleteLine", NULL, N_("_Delete Line"), "<control>y", N_("Delete the current line"),
+ 	 G_CALLBACK(ui_delete_line)},
+ 	{"WordCount", NULL, N_("_Word Count"), NULL, N_("Word count"), G_CALLBACK(ui_word_count)},
++#ifdef HAVE_PYTHON
+ 	{"LoremIpsum", NULL, N_("Lorem Ipsum generator"), NULL, N_("Lorem Ipsum generator"),
+ 	 G_CALLBACK(ui_lorem_ipsum)},
++#endif
+ 	{"RelativeFilename", NULL, N_("Insert Relative Filename"), NULL, N_("Insert Relative Filename"),
+ 	 G_CALLBACK(ui_insert_relative_filename)},
+ 	{"AbsoluteFilename", NULL, N_("Insert Absolute Filename"), NULL, N_("Insert Absolute Filename"),
+@@ -911,8 +913,10 @@ static const GtkActionEntry global_actio
+ 	{"RewrapLines", NULL, N_("Rewrap _Lines"), NULL, N_("Rewrap lines"), G_CALLBACK(ui_rewrap_lines)},
+ 	{"StripTrailingWhitespace", NULL, N_("Strip T_railing Whitespace"), NULL, N_("Strip trailing whitespace"),
+ 	 G_CALLBACK(ui_strip_trailing_whitespace)},
++#ifdef HAVE_PYTHON
+ 	{"JsBeautify", NULL, N_("Javascript beautifier"), NULL, N_("Javascript beautifier"),
+ 	 G_CALLBACK(ui_jsbeautify)},
++#endif
+ 	{"BrowserPreview", BF_STOCK_BROWSER_PREVIEW, N_("Preview in browser"), NULL, N_("Preview in browser"),
+ 	 G_CALLBACK(ui_browser_preview)}
+ };
+--- src/rcfile.c
++++ src/rcfile.c
+@@ -788,6 +788,7 @@ GList *update_filters(GList *current, gb
+ 	defaults =
+ 		g_list_append(defaults,
+ 					  array_from_arglist(_("PHP Beautifier"), "|php_beautifier -t|", NULL));
++#ifdef HAVE_PYTHON
+ #ifdef WIN32
+ 	defaults =
+ 		g_list_append(defaults,
+@@ -809,6 +810,7 @@ GList *update_filters(GList *current, gb
+ 		g_list_append(defaults,
+ 					  array_from_arglist(_("Compress CSS"), "|"PKGDATADIR"/cssmin.py|", NULL));
+ #endif
++#endif
+ 	defaults =
+ 		g_list_append(defaults,
+ 					  array_from_arglist(_("CSS tidy"), "|csstidy --preserve_css=true -|", NULL));
+--- data/Makefile.in
++++ data/Makefile.in
+@@ -89,6 +89,27 @@ PRE_UNINSTALL = :
+ POST_UNINSTALL = :
+ build_triplet = @build@
+ host_triplet = @host@
++@ENABLE_ZENCODING_PLUGIN_TRUE@am__append_1 = \
++@ENABLE_ZENCODING_PLUGIN_TRUE@	lipsum/__init__.py \
++@ENABLE_ZENCODING_PLUGIN_TRUE@	lipsum/data/dictionary.txt \
++@ENABLE_ZENCODING_PLUGIN_TRUE@	lipsum/data/sample.txt \
++@ENABLE_ZENCODING_PLUGIN_TRUE@	lipsum/data/lipsum.xml \
++@ENABLE_ZENCODING_PLUGIN_TRUE@	jsbeautifier/__init__.py \
++@ENABLE_ZENCODING_PLUGIN_TRUE@	jsbeautifier/__version__.py \
++@ENABLE_ZENCODING_PLUGIN_TRUE@	jsbeautifier/unpackers/packer.py \
++@ENABLE_ZENCODING_PLUGIN_TRUE@	jsbeautifier/unpackers/javascriptobfuscator.py \
++@ENABLE_ZENCODING_PLUGIN_TRUE@	jsbeautifier/unpackers/myobfuscate.py \
++@ENABLE_ZENCODING_PLUGIN_TRUE@	jsbeautifier/unpackers/__init__.py \
++@ENABLE_ZENCODING_PLUGIN_TRUE@	jsbeautifier/unpackers/evalbased.py \
++@ENABLE_ZENCODING_PLUGIN_TRUE@	jsbeautifier/unpackers/urlencode.py
++
++@ENABLE_ZENCODING_PLUGIN_TRUE@am__append_2 = \
++@ENABLE_ZENCODING_PLUGIN_TRUE@	lorem-ipsum-generator \
++@ENABLE_ZENCODING_PLUGIN_TRUE@	jsbeautify \
++@ENABLE_ZENCODING_PLUGIN_TRUE@	jsmin.py \
++@ENABLE_ZENCODING_PLUGIN_TRUE@	css_decompressor \
++@ENABLE_ZENCODING_PLUGIN_TRUE@	cssmin.py
++
+ subdir = data
+ ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
+ am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
+@@ -384,7 +405,6 @@ pdfdir = @pdfdir@
+ prefix = @prefix@
+ program_transform_name = @program_transform_name@
+ psdir = @psdir@
+-runstatedir = @runstatedir@
+ sbindir = @sbindir@
+ sharedstatedir = @sharedstatedir@
+ srcdir = @srcdir@
+@@ -397,32 +417,10 @@ SUBDIRS = bflang bflib templates
+ EXTRA_DIST = $(nobase_bfdata_DATA) $(bfdata_SCRIPTS)
+ MAINTAINERCLEANFILES = Makefile.in
+ bfdatadir = $(pkgdatadir)
+-nobase_bfdata_DATA = \
+-	default_accelmap \
+-	encodings \
+-	snippets \
+-	lipsum/__init__.py \
+-	lipsum/data/dictionary.txt \
+-	lipsum/data/sample.txt \
+-	lipsum/data/lipsum.xml \
+-	jsbeautifier/__init__.py \
+-	jsbeautifier/__version__.py \
+-	jsbeautifier/unpackers/packer.py \
+-	jsbeautifier/unpackers/javascriptobfuscator.py \
+-	jsbeautifier/unpackers/myobfuscate.py \
+-	jsbeautifier/unpackers/__init__.py \
+-	jsbeautifier/unpackers/evalbased.py \
+-	jsbeautifier/unpackers/urlencode.py \
+-	colorprofiles/Light_theme \
+-	colorprofiles/Dark_theme
+-
+-bfdata_SCRIPTS = \
+-	lorem-ipsum-generator \
+-	jsbeautify \
+-	jsmin.py \
+-	css_decompressor \
+-	cssmin.py
+-
++nobase_bfdata_DATA = default_accelmap encodings snippets \
++	colorprofiles/Light_theme colorprofiles/Dark_theme \
++	$(am__append_1)
++bfdata_SCRIPTS = $(am__append_2)
+ all: all-recursive
+ 
+ .SUFFIXES:
