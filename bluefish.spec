@@ -8,7 +8,7 @@ URL:		http://bluefish.openoffice.nl/
 License:	GPLv2+
 Group:		Networking/WWW
 Source0:	http://www.bennewitz.com/bluefish/stable/source/%{name}-%{version}.tar.bz2
-Patch0:     bluefish-2.2.10-no-python.patch
+Patch0:     bluefish-2.2.11-no-python.patch
 BuildRequires: pkgconfig(enchant-2)
 BuildRequires: pkgconfig(gdk-3.0)
 BuildRequires: pkgconfig(gdk-pixbuf-2.0)
