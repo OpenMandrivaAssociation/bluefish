@@ -33,7 +33,7 @@
 +endif
 --- src/bfwin_uimanager.c
 +++ src/bfwin_uimanager.c
-@@ -892,8 +892,10 @@ static const GtkActionEntry global_actio
+@@ -912,8 +912,10 @@ static const GtkActionEntry global_actio
  	{"DeleteLine", NULL, N_("_Delete Line"), "<control>y", N_("Delete the current line"),
  	 G_CALLBACK(ui_delete_line)},
  	{"WordCount", NULL, N_("_Word Count"), NULL, N_("Word count"), G_CALLBACK(ui_word_count)},
@@ -44,7 +44,7 @@
  	{"RelativeFilename", NULL, N_("Insert Relative Filename"), NULL, N_("Insert Relative Filename"),
  	 G_CALLBACK(ui_insert_relative_filename)},
  	{"AbsoluteFilename", NULL, N_("Insert Absolute Filename"), NULL, N_("Insert Absolute Filename"),
-@@ -911,8 +913,10 @@ static const GtkActionEntry global_actio
+@@ -931,8 +933,10 @@ static const GtkActionEntry global_actio
  	{"RewrapLines", NULL, N_("Rewrap _Lines"), NULL, N_("Rewrap lines"), G_CALLBACK(ui_rewrap_lines)},
  	{"StripTrailingWhitespace", NULL, N_("Strip T_railing Whitespace"), NULL, N_("Strip trailing whitespace"),
  	 G_CALLBACK(ui_strip_trailing_whitespace)},
@@ -57,7 +57,7 @@
  };
 --- src/rcfile.c
 +++ src/rcfile.c
-@@ -788,6 +788,7 @@ GList *update_filters(GList *current, gb
+@@ -789,6 +789,7 @@ GList *update_filters(GList *current, gb
  	defaults =
  		g_list_append(defaults,
  					  array_from_arglist(_("PHP Beautifier"), "|php_beautifier -t|", NULL));
@@ -65,14 +65,14 @@
  #ifdef WIN32
  	defaults =
  		g_list_append(defaults,
-@@ -809,6 +810,7 @@ GList *update_filters(GList *current, gb
+@@ -810,6 +811,7 @@ GList *update_filters(GList *current, gb
  		g_list_append(defaults,
  					  array_from_arglist(_("Compress CSS"), "|"PKGDATADIR"/cssmin.py|", NULL));
  #endif
 +#endif
  	defaults =
  		g_list_append(defaults,
- 					  array_from_arglist(_("CSS tidy"), "|csstidy --preserve_css=true -|", NULL));
+ 					  array_from_arglist(_("CSS tidy"), "|csstidy - --preserve_css=true --silent=true |", NULL));
 --- data/Makefile.in
 +++ data/Makefile.in
 @@ -89,6 +89,27 @@ PRE_UNINSTALL = :
@@ -103,15 +103,15 @@
  subdir = data
  ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
  am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
-@@ -384,7 +405,6 @@ pdfdir = @pdfdir@
- prefix = @prefix@
- program_transform_name = @program_transform_name@
+@@ -395,7 +416,6 @@ program_transform_name = @program_transf
  psdir = @psdir@
+ pyexecdir = @pyexecdir@
+ pythondir = @pythondir@
 -runstatedir = @runstatedir@
  sbindir = @sbindir@
  sharedstatedir = @sharedstatedir@
  srcdir = @srcdir@
-@@ -397,32 +417,10 @@ SUBDIRS = bflang bflib templates
+@@ -408,32 +428,10 @@ SUBDIRS = bflang bflib templates
  EXTRA_DIST = $(nobase_bfdata_DATA) $(bfdata_SCRIPTS)
  MAINTAINERCLEANFILES = Makefile.in
  bfdatadir = $(pkgdatadir)

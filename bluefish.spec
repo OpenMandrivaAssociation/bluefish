@@ -2,13 +2,13 @@
 
 Summary:	Web development studio
 Name:		bluefish
-Version:	2.2.10
+Version:	2.2.11
 Release:	1
 URL:		http://bluefish.openoffice.nl/
 License:	GPLv2+
 Group:		Networking/WWW
 Source0:	http://www.bennewitz.com/bluefish/stable/source/%{name}-%{version}.tar.bz2
-Patch0:     bluefish-2.2.10-no-python.patch
+Patch0:     bluefish-2.2.11-no-python.patch
 BuildRequires: pkgconfig(enchant-2)
 BuildRequires: pkgconfig(gdk-3.0)
 BuildRequires: pkgconfig(gdk-pixbuf-2.0)
@@ -77,7 +77,7 @@ if [ "$1" = 0 ]; then
 fi
 
 %files -f %{name}.lang
-%doc AUTHORS README ChangeLog NEWS TODO
+%doc AUTHORS README ChangeLog TODO
 %exclude /usr/share/doc/bluefish/bflang/sample.bflang2
 %{_bindir}/%{name}
 %{_libdir}/%{name}
