@@ -77,7 +77,7 @@ if [ "$1" = 0 ]; then
 fi
 
 %files -f %{name}.lang
-%doc AUTHORS README ChangeLog NEWS TODO
+%doc AUTHORS README ChangeLog TODO
 %exclude /usr/share/doc/bluefish/bflang/sample.bflang2
 %{_bindir}/%{name}
 %{_libdir}/%{name}
