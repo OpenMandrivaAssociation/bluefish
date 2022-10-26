@@ -2,13 +2,13 @@
 
 Summary:	Web development studio
 Name:		bluefish
-Version:	2.2.11
+Version:	2.2.12
 Release:	1
 URL:		http://bluefish.openoffice.nl/
 License:	GPLv2+
 Group:		Networking/WWW
 Source0:	http://www.bennewitz.com/bluefish/stable/source/%{name}-%{version}.tar.bz2
-Patch0:     bluefish-2.2.11-no-python.patch
+#Patch0:     bluefish-2.2.11-no-python.patch
 BuildRequires: pkgconfig(enchant-2)
 BuildRequires: pkgconfig(gdk-3.0)
 BuildRequires: pkgconfig(gdk-pixbuf-2.0)
@@ -40,11 +40,6 @@ This is not a WYSIWYG editor but a HTML editor (you edit the HTML code).
 
 %prep
 %autosetup -p0
-
-# switch to enchant2
-sed -e 's|\[enchant\]|\[enchant-2\]|g' -e 's|\[enchant >|\[enchant-2 >|g' \
-    -e 's|enchant/enchant.h|enchant-2/enchant.h|g' -e 's|BF_dependencies enchant|BF_dependencies enchant-2|g' \
-    -i configure.ac
 
 %build
 autoreconf -vfi
