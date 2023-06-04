@@ -1,5 +1,7 @@
 %define _disable_ld_no_undefined 1
 
+%global optflags %{optflags} -Wno-incompatible-function-pointer-types
+
 Summary:	Web development studio
 Name:		bluefish
 Version:	2.2.14
