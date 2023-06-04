@@ -1,13 +1,17 @@
 %define _disable_ld_no_undefined 1
 
+# Clang  15/16 workarounds
+%global optflags %{optflags} -Wno-incompatible-function-pointer-types
+%global optflags %{optflags} -Wno-error -Wno-implicit-function-declaration
+
 Summary:	Web development studio
 Name:		bluefish
-Version:	2.2.12
+Version:	2.2.14
 Release:	1
 URL:		http://bluefish.openoffice.nl/
 License:	GPLv2+
 Group:		Networking/WWW
-Source0:	http://www.bennewitz.com/bluefish/stable/source/%{name}-%{version}.tar.bz2
+Source0:	http://www.bennewitz.com/bluefish/stable/source/%{name}-%{version}.tar.gz
 #Patch0:     bluefish-2.2.11-no-python.patch
 BuildRequires: pkgconfig(enchant-2)
 BuildRequires: pkgconfig(gdk-3.0)
@@ -77,7 +81,7 @@ fi
 %{_bindir}/%{name}
 %{_libdir}/%{name}
 %{_datadir}/%{name}
-%{_datadir}/appdata/%{name}.appdata.xml
+%{_datadir}/metainfo/bluefish.appdata.xml
 %{_datadir}/xml/%{name}
 %{_datadir}/applications/*
 %{_datadir}/pixmaps/*.png
