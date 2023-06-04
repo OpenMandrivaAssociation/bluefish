@@ -81,7 +81,7 @@ fi
 %{_bindir}/%{name}
 %{_libdir}/%{name}
 %{_datadir}/%{name}
-%{_datadir}/appdata/%{name}.appdata.xml
+
 %{_datadir}/xml/%{name}
 %{_datadir}/applications/*
 %{_datadir}/pixmaps/*.png
