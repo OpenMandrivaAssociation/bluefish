@@ -1,6 +1,8 @@
 %define _disable_ld_no_undefined 1
 
+# Clang  15/16 workarounds
 %global optflags %{optflags} -Wno-incompatible-function-pointer-types
+%global optflags %{optflags} -Wno-error -Wno-implicit-function-declaration
 
 Summary:	Web development studio
 Name:		bluefish
