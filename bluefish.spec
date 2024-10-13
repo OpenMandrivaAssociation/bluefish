@@ -6,7 +6,7 @@
 
 Summary:	Web development studio
 Name:		bluefish
-Version:	2.2.15
+Version:	2.2.16
 Release:	1
 URL:		http://bluefish.openoffice.nl/
 License:	GPLv2+
