@@ -13,6 +13,11 @@ License:	GPLv2+
 Group:		Networking/WWW
 Source0:	http://www.bennewitz.com/bluefish/stable/source/%{name}-%{version}.tar.gz
 #Patch0:     bluefish-2.2.11-no-python.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires: pkgconfig(enchant-2)
 BuildRequires: pkgconfig(gdk-3.0)
 BuildRequires: pkgconfig(gdk-pixbuf-2.0)
