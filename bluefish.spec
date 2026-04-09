@@ -18,6 +18,7 @@ BuildRequires: automake
 BuildRequires: libtool-base
 BuildRequires: slibtool
 BuildRequires: make
+BuildRequires: gettext
 BuildRequires: pkgconfig(enchant-2)
 BuildRequires: pkgconfig(gdk-3.0)
 BuildRequires: pkgconfig(gdk-pixbuf-2.0)
