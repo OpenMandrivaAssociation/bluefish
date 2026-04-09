@@ -63,8 +63,16 @@ autoreconf -vfi
 %make_install
 
 find %{buildroot} -name '*.la' -delete
-
-%find_lang %{name} --all-name
+	
+%find_lang %{name}
+%find_lang %{name}_plugin_about
+%find_lang %{name}_plugin_charmap
+%find_lang %{name}_plugin_entities
+%find_lang %{name}_plugin_htmlbar
+%find_lang %{name}_plugin_snippets
+%find_lang %{name}_plugin_zencoding
+cat %{name}_plugin_{about,charmap,entities,htmlbar,snippets,zencoding}.lang >> \
+    %{name}.lang
 
 desktop-file-install --dir %{buildroot}%{_datadir}/applications/ \
     %{buildroot}%{_datadir}/applications/*.desktop
