@@ -89,7 +89,8 @@ if [ "$1" = 0 ]; then
         %{_sysconfdir}/xml/catalog > /dev/null || :
 fi
 
-%files -f %{name}.lang
+%files 
+#-f %{name}.lang
 %doc AUTHORS README ChangeLog TODO
 %exclude /usr/share/doc/bluefish/bflang/sample.bflang2
 %{_bindir}/%{name}
