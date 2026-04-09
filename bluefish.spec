@@ -6,18 +6,18 @@
 
 Summary:	Web development studio
 Name:		bluefish
-Version:	2.2.19
-Release:	2
+Version:	2.4.1
+Release:	1
 URL:		https://bluefish.openoffice.nl/
 License:	GPLv2+
 Group:		Networking/WWW
-Source0:	http://www.bennewitz.com/bluefish/stable/source/%{name}-%{version}.tar.gz
+Source0:	http://www.bennewitz.com/bluefish/stable/source/%{name}-%{version}.tar.bz2
 #Patch0:     bluefish-2.2.11-no-python.patch
-BuildRequires:	autoconf
-BuildRequires:	automake
-BuildRequires:	libtool-base
-BuildRequires:	slibtool
-BuildRequires:	make
+BuildRequires: autoconf
+BuildRequires: automake
+BuildRequires: libtool-base
+BuildRequires: slibtool
+BuildRequires: make
 BuildRequires: pkgconfig(enchant-2)
 BuildRequires: pkgconfig(gdk-3.0)
 BuildRequires: pkgconfig(gdk-pixbuf-2.0)
@@ -32,8 +32,8 @@ BuildRequires: pkgconfig(libxml-2.0)
 BuildRequires: pkgconfig(pango)
 BuildRequires: intltool
 BuildRequires: desktop-file-utils
-BuildRequires:  libxml2-utils
-BuildRequires:  man
+BuildRequires: libxml2-utils >= 2.15.2
+BuildRequires: man
 
 Requires(post): libxml2-utils
 Requires(postun): libxml2-utils
